@@ -95,30 +95,8 @@ def func(msg):
 			pub.publish(twist)
 		
 		
-	#rospy.loginfo(person_pose[1][1])
+
 	
-	
-def talkback(msg):
-	#pub = rospy.Publisher('cmd_vel_mux/input/teleop', Twist, queue_size=5)
-	soundhandle = SoundClient()
-	soundhandle.stopAll()
-	rospy.sleep(2)
-	soundhandle.say("Which side is the kitchen bar")
-	rospy.sleep(2)
-	sentence = msg.data
-	"""
-	if sentence.find("left") >-1 or sentence.find("right") >-1  :
-		soundhandle.say("Thanks, i know the direction of kitchen bar now")
-		rospy.sleep(2)
-	if raise_hand(person_pose[1][1],person_pose[2][1],person_pose[0]):
-		if person_pose[3][0] < 0.5 and person_pose[3][0] < 0.5:
-			twist.linear.x = 0.2; twist.linear.y = 0; twist.linear.z = 0
-		elif person_pose[3][0] > 0.5 :
-			twist.linear.x = 0.2; twist.linear.y = 0; twist.linear.z = 0.2
-		elif person_pose[3][0] < 0.4 :
-			twist.linear.x = 0.2; twist.linear.y = 0; twist.linear.z = -0.2
-	pub.publish(twist)
-	"""	
 		
 	
 	
@@ -129,24 +107,13 @@ if __name__ == "__main__":
 	
 	rospy.init_node('restaurant', anonymous=True)
 	rospy.loginfo("started")
-	soundhandle = SoundClient()
-	rospy.sleep(3)
-	soundhandle.stopAll()
-	rospy.sleep(3)
-	soundhandle.say("Which side is the kitchen bar")
-	rospy.sleep(30)
 	
-		
-	soundhandle.say("i think i know the way now")
 	rospy.sleep(5)
 	emer_button = arduino_f()
 	emer_button.run()
 	person = rospy.Subscriber('/pose_estimator/pose_body', Person ,func)
 	
 	rospy.loginfo("started subscribe")
-	
-	#rospy.Subscriber('/pocketsphinx_recognizer/output', String, talkback)
-	
-	#rospy.loginfo(detected_person)
+
 	
 	rospy.spin()
